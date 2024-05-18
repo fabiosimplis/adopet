@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 
 public class Pet {
 
+    private Long id;
     private String tipo;
     private String nome;
     private String raca;
@@ -20,12 +21,8 @@ public class Pet {
         this.peso = peso;
     }
 
-    public Pet(JsonObject jsonObject) {
-        //this.id = jsonObject.get("id").getAsLong();
-        this.tipo = jsonObject.get("tipo").getAsString();
-        this.nome = jsonObject.get("nome").getAsString();
-        this.raca = jsonObject.get("raca").getAsString();
-        this.idade = jsonObject.get("idade").getAsInt();
+    public Long getId(){
+        return id;
     }
 
     public String getTipo() {

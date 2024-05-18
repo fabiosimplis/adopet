@@ -2,12 +2,14 @@ package br.com.alura.service;
 
 import br.com.alura.client.ClientHttpConfiguration;
 import br.com.alura.domain.Pet;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.http.HttpResponse;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class PetService {
@@ -30,13 +32,11 @@ public class PetService {
             return;
         }
         String responseBody = response.body();
-        JsonArray jsonArray = JsonParser.parseString(responseBody).getAsJsonArray();
+
+        Pet[] pets = new ObjectMapper().readValue(responseBody, Pet[].class);
         System.out.println("Pets cadastrados:");
-        for (JsonElement element : jsonArray) {
-            JsonObject jsonObject = element.getAsJsonObject();
-            Pet pet = new Pet(jsonObject);
-            System.out.println(pet);
-        }
+        Arrays.stream(pets).forEach(System.out::println);
+
     }
 
     public void importarPetsDoAbrigo() throws IOException, InterruptedException {
