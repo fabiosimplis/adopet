@@ -43,7 +43,6 @@ public class AbrigoService {
 
         Abrigo abrigo = new Abrigo(nome, telefone, email);
 
-
         String uri = "http://localhost:8080/abrigos";
 
         HttpResponse<String> response = client.dispararRequisicoesPost(uri, abrigo);

@@ -32,10 +32,11 @@ public class PetService {
             return;
         }
         String responseBody = response.body();
-
+        System.out.println(responseBody);
         Pet[] pets = new ObjectMapper().readValue(responseBody, Pet[].class);
         System.out.println("Pets cadastrados:");
-        Arrays.stream(pets).forEach(System.out::println);
+        Arrays.stream(pets).forEach(pet -> System.out.println(pet.getId()));
+
 
     }
 
@@ -58,10 +59,10 @@ public class PetService {
             String[] campos = line.split(",");
             Pet pet = new Pet(campos[0], campos[1], campos[2], Integer.parseInt(campos[3]), campos[4], Float.parseFloat(campos[5]));
 
-            String json = new Gson().toJson(pet);
-            String uri = "http://localhost:8080/abrigos/" + idOuNome + "/pets";
 
-            HttpResponse<String> response = client.dispararRequisicoesPost(uri, json);
+            String uri = "http://localhost:8080/abrigos/" + idOuNome + "/pets";
+            System.out.println(pet);
+            HttpResponse<String> response = client.dispararRequisicoesPost(uri, pet);
             int statusCode = response.statusCode();
             String responseBody = response.body();
             if (statusCode == 200) {
