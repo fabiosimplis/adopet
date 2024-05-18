@@ -12,6 +12,10 @@ public class Pet {
     private String cor;
     private Float peso;
 
+    public Pet(){
+
+    }
+
     public Pet(String tipo, String nome, String raca, Integer idade, String cor, Float peso) {
         this.tipo = tipo;
         this.nome = nome;
@@ -51,11 +55,12 @@ public class Pet {
 
     @Override
     public String toString() {
-        return "Pet{" +
+        return "id=" + id +
                 ", tipo='" + tipo + '\'' +
                 ", nome='" + nome + '\'' +
                 ", raca='" + raca + '\'' +
                 ", idade=" + idade +
-                '}';
+                ", cor='" + cor + '\'' +
+                ", peso=" + peso;
     }
 }
