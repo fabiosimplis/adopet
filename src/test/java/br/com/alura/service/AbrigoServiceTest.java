@@ -29,6 +29,7 @@ public class AbrigoServiceTest {
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(baos);
+
         System.setOut(printStream);
 
         when(response.body()).thenReturn("[{"+abrigo.toStringJson()+"}]");
