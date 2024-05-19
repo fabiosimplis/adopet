@@ -39,4 +39,31 @@ public class Abrigo {
     public Pet[] getPets() {
         return pets;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPets(Pet[] pets) {
+        this.pets = pets;
+    }
+
+
+    public String toStringJson() {
+        return """
+                     "id":%s,"nome":"%s","telefone":"%s","email":"%s"
+                     """.formatted(this.id, this.nome, this.telefone, this.email);
+    }
 }

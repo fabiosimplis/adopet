@@ -3,13 +3,13 @@ package br.com.alura.service;
 import br.com.alura.client.ClientHttpConfiguration;
 import br.com.alura.domain.Pet;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.http.HttpResponse;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class PetService {
@@ -32,20 +32,24 @@ public class PetService {
             return;
         }
         String responseBody = response.body();
-        System.out.println(responseBody);
         Pet[] pets = new ObjectMapper().readValue(responseBody, Pet[].class);
-        System.out.println("Pets cadastrados:");
-        Arrays.stream(pets).forEach(pet -> System.out.println(pet.getId()));
-
-
+        List<Pet> petsList = Arrays.stream(pets).toList();
+        if (petsList.isEmpty()){
+            System.out.println("Não há pets cadastrados");
+        } else {
+            System.out.println("Pets cadastrados:");
+            Arrays.stream(pets).forEach(pet -> System.out.println(pet.getId()));
+        }
     }
 
     public void importarPetsDoAbrigo() throws IOException, InterruptedException {
+
+        Scanner sc = new Scanner(System.in);
         System.out.println("Digite o id ou nome do abrigo:");
-        String idOuNome = new Scanner(System.in).nextLine();
+        String idOuNome = sc.nextLine();
 
         System.out.println("Digite o nome do arquivo CSV:");
-        String nomeArquivo = new Scanner(System.in).nextLine();
+        String nomeArquivo = sc.nextLine();
 
         BufferedReader reader = null;
         try {
@@ -77,6 +81,7 @@ public class PetService {
             }
         }
         reader.close();
+        //sc.close();
 
     }
 }
